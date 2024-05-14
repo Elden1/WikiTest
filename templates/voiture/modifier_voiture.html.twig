@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="/">
+    <h1>Modifier votre voiture</h1>
+</a><br><br>
+    <form action="{{ path('enregistrer_modification', {'id': voiture.id}) }}" method="post">
+        <label for="marque">Marque :</label>
+        <input type="text" id="marque" name="marque" value="{{ voiture.marque }}" required><br><br>
+
+        <label for="modele">Modèle :</label>
+        <input type="text" id="modele" name="modele" value="{{ voiture.modele }}" required><br><br>
+
+        <label for="prix">Prix par jour :</label>
+        <input type="number" id="prix" name="prix" value="{{ voiture.prix }}" required><br><br>
+
+        <label for="date_debut">Date début de location :</label>
+        <input type="date" id="date_debut" name="date_debut" value="{{ voiture.dateDebut|date('Y-m-d') }}" required><br><br>
+
+        <label for="date_fin">Date fin de location :</label>
+        <input type="date" id="date_fin" name="date_fin" value="{{ voiture.dateFin|date('Y-m-d') }}" required><br><br>
+
+        <label for="statut">Statut :</label>
+        <select id="statut" name="statut" required>
+            <option value="Disponible" {% if voiture.statut == 'name' %}selected{% endif %}>Disponible</option>
+            <option value="Non disponible" {% if voiture.statut == 'Non disponible' %}selected{% endif %}>Non disponible</option>
+        </select><br><br>
+
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+
+    <form action="{{ path('supprimer_voiture', {'id': voiture.id}) }}" method="post">
+        <button class="btnSupprimer" type="submit">Supprimer cette voiture</button>
+    </form>
+{% endblock %}

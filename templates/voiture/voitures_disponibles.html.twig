@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Voitures Disponibles</h1>
+
+    {% if voitures is not empty %}
+<p>Voici la liste des voitures disponibles entre {{ dateDebut|date('d/m/Y') }} et {{ dateFin|date('d/m/Y') }} :</p>
+        <ul>
+            {% for voiture in voitures %}
+                <li>{{ voiture.marque }} - {{ voiture.modele }} - {{ voiture.prix }} € par jour</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune voiture disponible entre les dates spécifiées.</p><br><br>
+
+        <a href="/voiture-filtre">
+            <h3>Retour liste</h3>
+        </a>
+    {% endif %}
+{% endblock %}

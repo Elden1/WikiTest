@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Création de Voiture</h1>
+
+    <h3 class="presentation">Formulaire permettant d'ajouter un nouveau van à la base de donnée. </h3> <br>
+    <form action="{{ path('creer_voiture') }}" method="post">
+        <label for="marque">Marque :</label>
+        <input type="text" id="marque" name="marque" required><br>
+
+        <label for="modele">Modèle :</label>
+        <input type="text" id="modele" name="modele" required><br>
+
+        <label for="prix">Prix par jour :</label>
+        <input type="number" id="prix" name="prix" required><br>
+
+        <label for="date_debut">Date début de location :</label>
+        <input type="date" id="date_debut" name="date_debut" required><br><br>
+
+        <label for="date_fin">Date fin de location :</label>
+        <input type="date" id="date_fin" name="date_fin" required><br><br>
+
+        <label for="statut">Statut :</label>
+        <select id="statut" name="statut" required>
+            <option value="Disponible">Disponible</option>
+            <option value="Non disponible">Non disponible</option>
+        </select><br><br>
+
+        <button type="submit">Enregistrer</button><br><br>
+    </form>
+
+  <button class="voiture-filtre-button" onclick="window.location.href = 'voiture-filtre'"><strong>Liste voitures</strong></button>
+{% endblock %}
