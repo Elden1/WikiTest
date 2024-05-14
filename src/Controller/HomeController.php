@@ -13,11 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
+    // Route de la page accueil
 #[Route('/', name: 'home')]
 public function index (Request $request): Response {
     return $this->render('home/index.html.twig');
 }
 
+    // Route de la page de création de voiture 
 #[Route('/creer-voiture', name: 'creer_voiture')]
 public function creerVoiture(Request $request, EntityManagerInterface $entityManager): Response
 {
@@ -49,13 +51,14 @@ public function creerVoiture(Request $request, EntityManagerInterface $entityMan
     return $this->redirectToRoute('page_succes');
     }
 
-
+    // Route en cas de succès d'ajout dans la base de donnée 
     #[Route('/page_succes', name: 'page_succes')]
     public function pageSucces(): Response
     {
         return $this->render('voiture/page_succes.html.twig');
     }
 
+    // Route affichage des voitures et du filtre
     #[Route('/voiture-filtre', name: 'voiture_filtre')]
     public function voitureFiltre(VoitureRepository $voitureRepository): Response
     {
@@ -67,6 +70,7 @@ public function creerVoiture(Request $request, EntityManagerInterface $entityMan
         ]);
     }
 
+    // Route pour afficher une voiture dans le formulaire de modification par ID
     #[Route('/modifier_voiture/{id}', name: 'modifier_voiture')]
     public function modifierVoiture(Request $request, EntityManagerInterface $entityManager, VoitureRepository $voitureRepository, int $id): Response
     {
@@ -82,6 +86,7 @@ public function creerVoiture(Request $request, EntityManagerInterface $entityMan
         ]);
     }
 
+    // Route de traitement de la modification d'une voiture par ID
     #[Route('/modifier_voiture/{id}', name: 'modifier_voiture_submit', methods: ['POST'])]
     public function modifierVoitureSubmit(Request $request, EntityManagerInterface $entityManager, VoitureRepository $voitureRepository, int $id): Response
     {
@@ -128,6 +133,7 @@ public function creerVoiture(Request $request, EntityManagerInterface $entityMan
         return $this->redirectToRoute('voiture_filtre');
     }
 
+    // Route pour supprimer une voiture
     #[Route('/supprimer_voiture/{id}', name: 'supprimer_voiture')]
     public function supprimerVoiture($id, EntityManagerInterface $entityManager): Response
     {
@@ -146,6 +152,7 @@ public function creerVoiture(Request $request, EntityManagerInterface $entityMan
         return $this->redirectToRoute('voiture_filtre');
     }
 
+    // Route pour voitures filtrés
     #[Route('/recherche-voitures', name: 'recherche_voitures')]
     public function rechercheVoitures(Request $request, VoitureRepository $voitureRepository): Response
     {
